@@ -1,9 +1,8 @@
 package kurs;
-
+/*
+интерфейс УЧАСТНИК
+*/
 public interface Participle {
-
-    void setCapability(Obstructive obstructive, double limit);
-
-    double getCapability(Obstructive obstructive);
-
+    //получение возможности/ограничения по ИД препятствия
+    double getCapability(String id);
 }

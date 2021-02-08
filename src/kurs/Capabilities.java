@@ -1,57 +1,41 @@
 package kurs;
-
+/*
+класс ВОЗМОЖНОСТИ/ОГРАНИЧЕНИЯ для участников
+*/
 import java.util.HashMap;
 import java.util.Map;
 
 public class Capabilities {
-    private final Map<Obstructive, Double> map;
+    //хэш-мап по ИД препятствия
+    private final Map<String, Double> map;
 
+    //конструктор
     Capabilities() {
         map = new HashMap<>();
     }
 
-    public void set(Obstructive obstructive, double limit) {
-        if (obstructive == null || limit <= 0) {
+    //удаление
+    public void del(String id) {
+        map.remove(id);
+    }
+
+    //очистка
+    public void clear() {
+        map.clear();
+    }
+
+    //установка/назначение
+    public void set(String id, double limit) {
+        if (limit <= 0) {
+            del(id);
             return;
         }
-        for (Map.Entry<Obstructive, Double> item: map.entrySet()) {
-            if (item.getKey().getClass() == obstructive.getClass()) {
-                item.setValue(limit);
-                return;
-            }
-        }
-        map.put(obstructive, limit);
+        map.put(id, limit);
     }
 
-    public double get(Obstructive obstructive) {
-        if (obstructive == null) {
-            return -1;
-        }
-        Double limit;
-        for (Map.Entry<Obstructive, Double> item: map.entrySet()) {
-            if (item.getKey().getClass() == obstructive.getClass()) {
-                limit = item.getValue();
-                if (limit == null) {
-                    return -1;
-                }
-                return limit;
-            }
-        }
-        return -1;
-    }
-
-    @Override
-    public String toString() {
-        if (map.size() == 0) {
-            return "ничего не могу";
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Obstructive, Double> item: map.entrySet()) {
-            if (stringBuilder.length() != 0) {
-                stringBuilder.append(", ");
-            }
-            stringBuilder.append(String.format("%s %.1f м", item.getKey().toString(), item.getValue()));
-        }
-        return stringBuilder.toString();
+    //получение
+    public double get(String id) {
+        Double limit = map.get(id);
+        return limit == null ? -1: limit;
     }
 }

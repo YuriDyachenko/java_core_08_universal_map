@@ -1,27 +1,28 @@
 package kurs;
-
+/*
+класс ЧЕЛОВЕК, реализует УЧАСТНИКА
+*/
 public class Man implements Participle {
+    //имя
     private final String name;
-    private final Capabilities capabilities;
+    //возможности/ограничения
+    public final Capabilities capabilities;
 
+    //конструктор
     public Man(String name) {
         this.name = name;
         capabilities = new Capabilities();
     }
 
+    //расширенное имя
     @Override
     public String toString() {
-        return String.format("Человек %s: %s", name, capabilities.toString());
+        return String.format("Человек %s:", name);
     }
 
+    //получение возможности/ограничения по ИД препятствия
     @Override
-    public void setCapability(Obstructive obstructive, double limit) {
-        capabilities.set(obstructive, limit);
+    public double getCapability(String id) {
+        return capabilities.get(id);
     }
-
-    @Override
-    public double getCapability(Obstructive obstructive) {
-        return capabilities.get(obstructive);
-    }
-
 }

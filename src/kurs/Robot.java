@@ -1,26 +1,28 @@
 package kurs;
-
+/*
+класс РОБОТ, реализует УЧАСТНИКА
+*/
 public class Robot implements Participle {
+    //имя
     private final String name;
-    private final Capabilities capabilities;
+    //возможности/ограничения
+    public final Capabilities capabilities;
 
+    //конструктор
     public Robot(String name) {
         this.name = name;
         capabilities = new Capabilities();
     }
 
+    //расширенное имя
     @Override
     public String toString() {
-        return String.format("Робот %s: %s", name, capabilities.toString());
+        return String.format("Робот %s:", name);
     }
 
+    //получение возможности/ограничения по ИД препятствия
     @Override
-    public void setCapability(Obstructive obstructive, double limit) {
-        capabilities.set(obstructive, limit);
-    }
-
-    @Override
-    public double getCapability(Obstructive obstructive) {
-        return capabilities.get(obstructive);
+    public double getCapability(String id) {
+        return capabilities.get(id);
     }
 }
